@@ -17,6 +17,7 @@ out_folder = Path("resources/out/spells/")
 ExecutionMode = Literal["single", "statistical"]
 execution_mode: ExecutionMode = "single"
 
+
 def transform(path: Path):
     raw_text = path.read_text()
     try:
@@ -59,4 +60,6 @@ for dirpath, _, filenames in os.walk(in_folder):
 for trait in new_traits:
     print(f'{trait} = "{trait}"')
 
-print(f"Processed {processed} files, {successes} succeeded, {successes/processed:.2%} success rate")
+print(
+    f"Processed {processed} files, {successes} succeeded, {successes / processed:.2%} success rate"
+)
