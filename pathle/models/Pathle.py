@@ -2,8 +2,14 @@ from enum import Enum
 
 from pydantic import BaseModel
 
-from pathle.models.Pathfinder2e import Pf2eTradition, Pf2eSaveType, Pf2eSpellRange, Pf2eTraits, Pf2eRarity, \
-    Pf2eDamageType
+from pathle.models.Pathfinder2e import (
+    Pf2eTradition,
+    Pf2eSaveType,
+    Pf2eSpellRange,
+    Pf2eTraits,
+    Pf2eRarity,
+    Pf2eDamageType, Pf2eSpellDuration,
+)
 from pathle.models.foundry import FoundrySpell
 
 
@@ -52,5 +58,4 @@ class PathleSpell(BaseModel):
     target: PathleSpellTarget
     description: list[str]
     damage_types: set[Pf2eDamageType]
-
-    duration: FoundrySpellDuration
+    duration: Pf2eSpellDuration

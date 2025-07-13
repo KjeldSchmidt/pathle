@@ -27,7 +27,7 @@
         },
         "duration": {
             "sustained": false,
-            "value": "until used 10 times or until the target's body parts are removed from the doll"
+            "value": "varies"
         },
         "heightening": {
             "damage": {

@@ -9,7 +9,8 @@ from pathle.models.Pathfinder2e import (
     Pf2eDamageType,
     Pf2eRarity,
     Pf2eTradition,
-    Pf2eTraits, Pf2eSpellRange,
+    Pf2eTraits,
+    Pf2eSpellRange, Pf2eSpellDuration,
 )
 
 
@@ -165,38 +166,6 @@ class FoundryPathfinderPublicationDetails(ClosedModel):
     license: str
     remaster: bool
     title: str
-
-
-class Pf2eSpellDuration(Enum):
-    instant = "instantaneous"
-
-    rounds_one = "1 round"
-
-    minutes_1 = "1 minute"
-    minutes_10 = "10 minutes"
-
-    hours_1 = "1 hour"
-    hours_8 = "8 hours"
-
-    varies = "varies"
-
-    end_of_next_turn = "until the end of your next turn"
-    next_daily_preparations = "until the next time you make your daily preparations"
-
-    @classmethod
-    def _missing_(cls, value):
-        if value == "":
-            return cls.instant
-
-        if isinstance(value, str):
-            if value.startswith("sustained up to"):
-                value = value.replace("sustained up to ", "")
-
-            value = value.lower()
-            for member in cls:
-                if member.value == value:
-                    return member
-        return None
 
 
 class FoundrySpellDuration(ClosedModel):

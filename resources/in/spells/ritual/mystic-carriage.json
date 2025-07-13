@@ -16,7 +16,7 @@
         },
         "duration": {
             "sustained": false,
-            "value": "1 week or until the named destination is reached, whichever comes first"
+            "value": "1 week"
         },
         "level": {
             "value": 3

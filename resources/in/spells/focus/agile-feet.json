@@ -16,7 +16,7 @@
         },
         "duration": {
             "sustained": false,
-            "value": "until the end of the current turn"
+            "value": "until the end of your turn"
         },
         "level": {
             "value": 1

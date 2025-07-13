@@ -21,7 +21,7 @@
         },
         "duration": {
             "sustained": false,
-            "value": "until the end of your target's next turn"
+            "value": "until the end of the target's next turn"
         },
         "level": {
             "value": 4

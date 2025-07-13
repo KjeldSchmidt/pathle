@@ -27,6 +27,7 @@ def transform(path: Path):
     except ValidationError as err:
         return err
 
+
 def main():
     processed = 0
     successes = 0
@@ -44,11 +45,14 @@ def main():
                     print(f"Validation errors for file {filepath}:")
                     for error in result.errors():
                         print(f"  - {error}")
+                        if error["type"] == "enum":
+                            print(error["input"])
 
                     exit(0)
 
     print(
         f"Processed {processed} files, {successes} succeeded, {successes / processed:.2%} success rate"
     )
+
 
 main()
