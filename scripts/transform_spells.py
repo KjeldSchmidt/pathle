@@ -19,47 +19,36 @@ execution_mode: ExecutionMode = "single"
 
 
 def transform(path: Path):
-    raw_text = path.read_text()
+    raw_json = path.read_text()
     try:
-        return FoundrySpell.model_validate_json(raw_text)
+        foundry_spell = FoundrySpell.model_validate_json(raw_json)
+        print(foundry_spell.system.duration)
+        return foundry_spell
     except ValidationError as err:
         return err
 
+def main():
+    processed = 0
+    successes = 0
+    for dirpath, _, filenames in os.walk(in_folder):
+        for filename in filenames:
+            if filename.endswith(".json") and filename not in IGNORED_FILES:
+                filepath = Path(dirpath) / filename
+                result = transform(filepath)
+                success = isinstance(result, FoundrySpell)
+                processed += 1
+                successes += 1 if success else 0
 
-processed = 0
-successes = 0
-new_traits = set()
-for dirpath, _, filenames in os.walk(in_folder):
-    for filename in filenames:
-        if filename.endswith(".json") and filename not in IGNORED_FILES:
-            filepath = Path(dirpath) / filename
-            result = transform(filepath)
-            success = isinstance(result, FoundrySpell)
-            processed += 1
+                if not success and execution_mode == "single":
+                    print(f"Processed {successes} files before error:")
+                    print(f"Validation errors for file {filepath}:")
+                    for error in result.errors():
+                        print(f"  - {error}")
 
-            if success:
-                successes += 1
+                    exit(0)
 
-            if not success and execution_mode == "statistical":
-                for error in result.errors():
-                    if error["type"] == "enum" and error["loc"][1] == "traits":
-                        new_traits.add(error["input"])
+    print(
+        f"Processed {processed} files, {successes} succeeded, {successes / processed:.2%} success rate"
+    )
 
-            if not success and execution_mode == "single":
-                print(f"Processed {successes} files before error:")
-                print(f"Validation errors for file {filepath}:")
-                for error in result.errors():
-                    print(f"  - {error}")
-                    if error["type"] == "enum" and error["loc"][1] == "traits":
-                        new_traits.add(error["input"])
-
-                for trait in new_traits:
-                    print(f'{trait} = "{trait}"')
-                exit(0)
-
-for trait in new_traits:
-    print(f'{trait} = "{trait}"')
-
-print(
-    f"Processed {processed} files, {successes} succeeded, {successes / processed:.2%} success rate"
-)
+main()

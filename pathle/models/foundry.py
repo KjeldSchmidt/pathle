@@ -1,4 +1,5 @@
 from enum import Enum
+from typing import Literal
 
 from pydantic import BaseModel, ConfigDict, Field, field_validator
 
@@ -8,7 +9,7 @@ from pathle.models.Pathfinder2e import (
     Pf2eDamageType,
     Pf2eRarity,
     Pf2eTradition,
-    Pf2eTraits,
+    Pf2eTraits, Pf2eSpellRange,
 )
 
 
@@ -72,10 +73,49 @@ class FoundrySpellRules(ClosedModel):
 
 class FoundryActionType(Enum):
     reaction = "reaction"
+    free = "free"
+    one_action = "1"
+    two_actions = "2"
+    three_actions = "3"
+
+    one_to_two = "1 or 2"
+    one_to_three = "1 to 3"
+    two_to_three = "2 or 3"
+    two_to_six = "2 to 2 rounds"
+
+    one_minute = "1 minute"
+    five_minutes = "5 minutes"
+    ten_minutes = "10 minutes"
+    thirty_minutes = "30 minutes"
+
+    one_hour = "1 hour"
+    two_hours = "2 hours"
+    three_hours = "3 hours"
+    four_hours = "4 hours"
+    eight_hours = "8 hours"
+
+    one_day = "1 day"
+    two_days = "2 days"
+    three_days = "3 days"
+    six_days = "6 days"
+    seven_days = "7 days"
+    nine_days = "9 days"
+
+    @classmethod
+    def _missing_(cls, value):
+        if isinstance(value, str):
+            value = value.lower()
+            for member in cls:
+                if member.value == value:
+                    return member
+
+        if value == "1 week":
+            return cls.seven_days
+        return None
 
 
 class FoundryTime(ClosedModel):
-    value: FoundryActionType | str
+    value: FoundryActionType
 
 
 class FoundrySpellTarget(ClosedModel):
@@ -111,7 +151,14 @@ class FoundryTraits(ClosedModel):
 
 
 class FoundrySpellRange(ClosedModel):
-    value: str
+    value: Pf2eSpellRange | None
+
+    @field_validator("value", mode="before")
+    @classmethod
+    def empty_string_to_none(cls, v):
+        if v == "":
+            return None
+        return v
 
 
 class FoundryPathfinderPublicationDetails(ClosedModel):
@@ -120,9 +167,41 @@ class FoundryPathfinderPublicationDetails(ClosedModel):
     title: str
 
 
+class Pf2eSpellDuration(Enum):
+    instant = "instantaneous"
+
+    rounds_one = "1 round"
+
+    minutes_1 = "1 minute"
+    minutes_10 = "10 minutes"
+
+    hours_1 = "1 hour"
+    hours_8 = "8 hours"
+
+    varies = "varies"
+
+    end_of_next_turn = "until the end of your next turn"
+    next_daily_preparations = "until the next time you make your daily preparations"
+
+    @classmethod
+    def _missing_(cls, value):
+        if value == "":
+            return cls.instant
+
+        if isinstance(value, str):
+            if value.startswith("sustained up to"):
+                value = value.replace("sustained up to ", "")
+
+            value = value.lower()
+            for member in cls:
+                if member.value == value:
+                    return member
+        return None
+
+
 class FoundrySpellDuration(ClosedModel):
     sustained: bool
-    value: str
+    value: Pf2eSpellDuration
 
 
 class FoundrySpellDescription(ClosedModel):
@@ -197,4 +276,4 @@ class FoundrySpell(ClosedModel):
     img: str
     name: str
     system: FoundrySpellSystem
-    type: str
+    type: Literal["spell"]
