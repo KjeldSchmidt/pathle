@@ -4,7 +4,10 @@
     "img": "icons/magic/sonic/scream-wail-shout-teal.webp",
     "name": "Unbearable Cacophony",
     "system": {
-        "area": null,
+        "area": {
+            "type": "emanation",
+            "value": 5280
+        },
         "cost": {
             "value": "valuable crystals and tuning forks worth 300 gp"
         },
@@ -27,7 +30,7 @@
             "title": "Pathfinder War of Immortals"
         },
         "range": {
-            "value": "1-mile radius circle centered on you"
+            "value": ""
         },
         "requirements": "",
         "ritual": {

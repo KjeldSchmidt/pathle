@@ -4,7 +4,10 @@
     "img": "icons/magic/fire/elemental-fire-humanoid.webp",
     "name": "Lament",
     "system": {
-        "area": null,
+        "area": {
+            "type": "cone",
+            "value": 30
+        },
         "cost": {
             "value": ""
         },
@@ -50,7 +53,7 @@
             "title": "Pathfinder Lost Omens Divine Mysteries"
         },
         "range": {
-            "value": "30-foot cone"
+            "value": ""
         },
         "requirements": "",
         "rules": [],

@@ -4,7 +4,10 @@
     "img": "icons/magic/nature/leaf-elm-sparkle-glow-green.webp",
     "name": "Purify Tanglebriar",
     "system": {
-        "area": null,
+        "area": {
+          "type": "emanation",
+          "value": 5280
+        },
         "cost": {
             "value": "rare incense and offerings worth a total value of 2,000 gp"
         },
@@ -27,7 +30,7 @@
             "title": "Pathfinder #212: A Voice in the Blight"
         },
         "range": {
-            "value": "1-mile-radius circle centered on you"
+            "value": ""
         },
         "requirements": "",
         "ritual": {

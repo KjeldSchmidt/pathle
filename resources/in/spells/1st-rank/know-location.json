@@ -32,7 +32,7 @@
                 },
                 "7": {
                     "range": {
-                        "value": "Planetary"
+                        "value": "planetary"
                     }
                 }
             },

@@ -4,7 +4,10 @@
     "img": "icons/magic/light/orb-hands-humanoid-yellow.webp",
     "name": "Light of Revelation",
     "system": {
-        "area": null,
+        "area": {
+            "type": "emanation",
+            "value": 30
+        },
         "cost": {
             "value": ""
         },
@@ -27,7 +30,7 @@
             "title": "Pathfinder Lost Omens Character Guide"
         },
         "range": {
-            "value": "30-foot emanation"
+            "value": ""
         },
         "requirements": "",
         "rules": [],

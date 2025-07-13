@@ -4,7 +4,10 @@
     "img": "icons/creatures/invertebrates/fly-wasp-mosquito-green.webp",
     "name": "Mosquito Blight",
     "system": {
-        "area": null,
+        "area": {
+            "type": "emanation",
+            "value": 5280
+        },
         "cost": {
             "value": "amber and rare incense worth 750 gp"
         },
@@ -32,7 +35,7 @@
             "title": "Pathfinder Lost Omens Monsters of Myth"
         },
         "range": {
-            "value": "1-mile-radius circle centered on you"
+            "value": ""
         },
         "requirements": "",
         "ritual": {

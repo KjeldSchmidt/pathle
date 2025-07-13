@@ -4,7 +4,10 @@
     "img": "icons/magic/perception/silhouette-stealth-shadow.webp",
     "name": "World in Shadow",
     "system": {
-        "area": null,
+        "area": {
+          "type": "emanation",
+          "value": 42240
+        },
         "cost": {
             "value": ""
         },
@@ -27,7 +30,7 @@
             "title": "Pathfinder War of Immortals"
         },
         "range": {
-            "value": "8-mile radius circle centered on you"
+            "value": ""
         },
         "requirements": "",
         "ritual": {

@@ -4,7 +4,10 @@
     "img": "icons/magic/unholy/strike-body-explode-disintegrate.webp",
     "name": "Void Harvest",
     "system": {
-        "area": null,
+        "area": {
+            "type": "emanation",
+            "value": 5280
+        },
         "cost": {
             "value": ""
         },
@@ -27,7 +30,7 @@
             "title": "Pathfinder War of Immortals"
         },
         "range": {
-            "value": "1-mile radius circle centered on you"
+            "value": ""
         },
         "requirements": "",
         "ritual": {
