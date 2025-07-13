@@ -161,6 +161,7 @@ class Pf2eDamageType(Enum):
 
 
 class Pf2eSpellRange(Enum):
+    self = "self"
     touch = "touch"
 
     varies = "varies"

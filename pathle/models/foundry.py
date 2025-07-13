@@ -152,13 +152,13 @@ class FoundryTraits(ClosedModel):
 
 
 class FoundrySpellRange(ClosedModel):
-    value: Pf2eSpellRange | None
+    value: Pf2eSpellRange
 
     @field_validator("value", mode="before")
     @classmethod
     def empty_string_to_none(cls, v):
         if v == "":
-            return None
+            return Pf2eSpellRange.self
         return v
 
 
