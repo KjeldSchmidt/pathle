@@ -1,0 +1,254 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background-color: #121213;
+    color: #ffffff;
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+h1 {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #ffffff;
+    margin-bottom: 10px;
+}
+
+header p {
+    color: #818384;
+    font-size: 1.1rem;
+}
+
+.input-section {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 30px;
+    position: relative;
+}
+
+#spell-input {
+    padding: 12px 16px;
+    font-size: 16px;
+    border: 2px solid #3a3a3c;
+    border-radius: 4px;
+    background-color: #121213;
+    color: #ffffff;
+    width: 300px;
+    outline: none;
+}
+
+#spell-input:focus {
+    border-color: #565758;
+}
+
+#submit-btn {
+    padding: 12px 20px;
+    font-size: 16px;
+    background-color: #538d4e;
+    color: #ffffff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+#submit-btn:hover {
+    background-color: #6aaa64;
+}
+
+#submit-btn:disabled {
+    background-color: #3a3a3c;
+    cursor: not-allowed;
+}
+
+.game-board {
+    margin-bottom: 30px;
+}
+
+.result-headers {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1.5fr 1fr 2fr 1fr 1.5fr 1.5fr 1.5fr;
+    gap: 2px;
+    margin-bottom: 10px;
+    padding: 0 2px;
+}
+
+.header-cell {
+    background-color: #3a3a3c;
+    color: #ffffff;
+    padding: 8px 4px;
+    text-align: center;
+    font-weight: bold;
+    font-size: 0.9rem;
+    border-radius: 2px;
+}
+
+.result-row {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1.5fr 1fr 2fr 1fr 1.5fr 1.5fr 1.5fr;
+    gap: 2px;
+    margin-bottom: 2px;
+    padding: 0 2px;
+}
+
+.result-cell {
+    padding: 8px 4px;
+    text-align: center;
+    font-size: 0.85rem;
+    border-radius: 2px;
+    font-weight: 500;
+    min-height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    word-wrap: break-word;
+    hyphens: auto;
+}
+
+.result-cell.correct {
+    background-color: #538d4e;
+    color: #ffffff;
+}
+
+.result-cell.wrong {
+    background-color: #3a3a3c;
+    color: #ffffff;
+}
+
+.result-cell.name {
+    font-weight: bold;
+    text-align: left;
+    padding-left: 8px;
+}
+
+.result-cell.name.correct {
+    background-color: #538d4e;
+}
+
+.result-cell.name.wrong {
+    background-color: #3a3a3c;
+}
+
+.game-info {
+    text-align: center;
+}
+
+#message {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+    min-height: 1.5rem;
+}
+
+#attempts {
+    color: #818384;
+    margin-bottom: 20px;
+}
+
+#new-game-btn {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #b59f3b;
+    color: #ffffff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+#new-game-btn:hover {
+    background-color: #c9b037;
+}
+
+.autocomplete-suggestions {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background-color: #2d2d2d;
+    border: 1px solid #3a3a3c;
+    border-radius: 4px;
+    max-height: 200px;
+    overflow-y: auto;
+    z-index: 1000;
+    display: none;
+}
+
+.autocomplete-suggestions.show {
+    display: block;
+}
+
+.suggestion-item {
+    padding: 10px 15px;
+    cursor: pointer;
+    border-bottom: 1px solid #3a3a3c;
+}
+
+.suggestion-item:hover {
+    background-color: #3a3a3c;
+}
+
+.suggestion-item:last-child {
+    border-bottom: none;
+}
+
+.win-message {
+    color: #538d4e;
+    font-weight: bold;
+}
+
+.lose-message {
+    color: #f5793a;
+    font-weight: bold;
+}
+
+.traits-cell {
+    font-size: 0.75rem;
+    line-height: 1.2;
+}
+
+.traditions-cell {
+    font-size: 0.8rem;
+    line-height: 1.2;
+}
+
+@media (max-width: 768px) {
+    .container {
+        padding: 10px;
+    }
+    
+    h1 {
+        font-size: 2rem;
+    }
+    
+    .result-headers,
+    .result-row {
+        grid-template-columns: 1.5fr 0.8fr 0.8fr 1fr 0.8fr 1.5fr 0.8fr 1fr 1fr 1fr;
+        gap: 1px;
+    }
+    
+    .header-cell,
+    .result-cell {
+        font-size: 0.75rem;
+        padding: 6px 2px;
+    }
+    
+    #spell-input {
+        width: 250px;
+    }
+} 

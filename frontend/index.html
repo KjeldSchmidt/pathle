@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pathle - Pathfinder 2e Spell Wordle</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Pathle</h1>
+            <p>Guess the Pathfinder 2e spell!</p>
+        </header>
+
+        <main>
+            <div class="input-section">
+                <input type="text" id="spell-input" placeholder="Enter spell name..." autocomplete="off">
+                <button id="submit-btn">Submit</button>
+            </div>
+
+            <div class="game-board">
+                <div class="result-headers">
+                    <div class="header-cell">Name</div>
+                    <div class="header-cell">Rank</div>
+                    <div class="header-cell">Type</div>
+                    <div class="header-cell">Range</div>
+                    <div class="header-cell">Save</div>
+                    <div class="header-cell">Traditions</div>
+                    <div class="header-cell">Rarity</div>
+                    <div class="header-cell">Target</div>
+                    <div class="header-cell">Damage</div>
+                    <div class="header-cell">Duration</div>
+                </div>
+                <div id="results-container"></div>
+            </div>
+
+            <div class="game-info">
+                <div id="message"></div>
+                <div id="attempts">Attempts: 0</div>
+                <button id="new-game-btn" style="display: none;">New Game</button>
+            </div>
+        </main>
+
+        <div class="autocomplete-suggestions" id="suggestions"></div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html> 
