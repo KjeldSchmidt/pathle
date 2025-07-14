@@ -4,7 +4,6 @@ class PathleGame {
         this.spellNames = [];
         this.currentSpell = null;
         this.attempts = 0;
-        this.maxAttempts = 6;
         this.gameOver = false;
         this.guessedSpells = [];
         
@@ -60,7 +59,7 @@ class PathleGame {
     
     handleInput(e) {
         const query = e.target.value.toLowerCase();
-        if (query.length < 2) {
+        if (query.length < 1) {
             this.hideSuggestions();
             return;
         }
@@ -139,8 +138,6 @@ class PathleGame {
         
         if (isCorrect) {
             this.endGame(true);
-        } else if (this.attempts >= this.maxAttempts) {
-            this.endGame(false);
         }
     }
     
@@ -205,7 +202,7 @@ class PathleGame {
     }
     
     updateAttempts() {
-        this.elements.attempts.textContent = `Attempts: ${this.attempts}/${this.maxAttempts}`;
+        this.elements.attempts.textContent = `Attempts: ${this.attempts}`;
     }
     
     endGame(won) {
@@ -213,11 +210,7 @@ class PathleGame {
         this.elements.input.disabled = true;
         this.elements.submitBtn.disabled = true;
         
-        if (won) {
-            this.elements.message.innerHTML = `<span class="win-message">Congratulations! You found the spell!</span>`;
-        } else {
-            this.elements.message.innerHTML = `<span class="lose-message">Game Over! The spell was: ${this.currentSpell.name}</span>`;
-        }
+        this.elements.message.innerHTML = `<span class="win-message">Congratulations! You found the spell!</span>`;
         
         this.elements.newGameBtn.style.display = 'inline-block';
     }

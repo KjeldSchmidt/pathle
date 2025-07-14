@@ -4,7 +4,7 @@ A Wordle-style game for Pathfinder 2e spells.
 
 ## How to Play
 
-1. **Objective**: Guess the secret Pathfinder 2e spell in 6 attempts or less.
+1. **Objective**: Guess the secret Pathfinder 2e spell! Take as many attempts as you need.
 
 2. **Making Guesses**: 
    - Type a spell name in the input field
@@ -33,7 +33,7 @@ A Wordle-style game for Pathfinder 2e spells.
 
 - **Autocomplete**: Type to search through 1,700+ Pathfinder 2e spells
 - **Visual Feedback**: Wordle-style color coding for correct/incorrect matches
-- **Attempt Tracking**: 6 attempts maximum per game
+- **Attempt Tracking**: Unlimited attempts per game
 - **New Game**: Start fresh with a new random spell
 - **Responsive Design**: Works on desktop and mobile
 
@@ -72,5 +72,6 @@ To run the game locally:
 - Only valid Pathfinder 2e spell names are accepted
 - Use the autocomplete suggestions to find the correct spelling
 - The target spell is randomly selected from all available spells
+- Take as many attempts as you need - there's no time limit!
 
 Enjoy playing Pathle! 

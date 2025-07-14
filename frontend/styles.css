@@ -187,6 +187,7 @@ header p {
     overflow-y: auto;
     z-index: 1000;
     display: none;
+    margin-top: 2px;
 }
 
 .autocomplete-suggestions.show {
