@@ -1,11 +1,10 @@
 import json
 import os
 from pathlib import Path
-from typing import List, Dict, Any
 
-from pathle.models.foundry import FoundrySpell
 from pathle.models.Pathle import PathleSpell
 from scripts.transform_spells import transform, IGNORED_FILES
+
 
 def export_spells_for_frontend():
     """Export all spells as JSON for the frontend"""
