@@ -163,8 +163,14 @@ class PathleGame {
             cellElement.className = 'result-cell';
             if (cell.class) cellElement.classList.add(cell.class);
             
-            const isMatch = this.compareValues(cell.value, this.getCellValue(this.currentSpell, index));
-            cellElement.classList.add(isMatch ? 'correct' : 'wrong');
+            let matchType;
+            if (index === 1) { // Rank column
+                matchType = this.compareRank(cell.value, this.getCellValue(this.currentSpell, index));
+            } else {
+                matchType = this.compareValuesWithPartial(cell.value, this.getCellValue(this.currentSpell, index));
+            }
+            
+            cellElement.classList.add(matchType === 'exact' ? 'correct' : matchType === 'partial' ? 'partial' : matchType === 'high' ? 'high' : matchType === 'low' ? 'low' : 'wrong');
             cellElement.textContent = cell.value;
             
             row.appendChild(cellElement);
@@ -194,6 +200,66 @@ class PathleGame {
             return guess.toLowerCase() === target.toLowerCase();
         }
         return guess === target;
+    }
+    
+    compareValuesWithPartial(guess, target) {
+        // Handle simple string comparisons first
+        if (typeof guess === 'string' && typeof target === 'string') {
+            // Check if these are comma-separated strings (formatted arrays)
+            if (guess.includes(',') || target.includes(',') || guess === 'None' || target === 'None') {
+                if (guess === 'None' && target === 'None') return 'exact';
+                if (guess === 'None' || target === 'None') return 'none';
+                
+                const guessItems = guess.split(',').map(s => s.trim().toLowerCase());
+                const targetItems = target.split(',').map(s => s.trim().toLowerCase());
+                
+                const matches = guessItems.filter(g => targetItems.includes(g));
+                const allGuessMatch = guessItems.every(g => targetItems.includes(g));
+                const allTargetMatch = targetItems.every(t => guessItems.includes(t));
+                
+                if (allGuessMatch && allTargetMatch) return 'exact';
+                if (matches.length > 0) return 'partial';
+                return 'none';
+            }
+            
+            // Simple string comparison
+            return guess.toLowerCase() === target.toLowerCase() ? 'exact' : 'none';
+        }
+        
+        // Handle array comparisons (like traditions, damage_types)
+        if (Array.isArray(guess) && Array.isArray(target)) {
+            if (guess.length === 0 && target.length === 0) return 'exact';
+            if (guess.length === 0 || target.length === 0) return 'none';
+            
+            const guessLower = guess.map(g => g.toLowerCase());
+            const targetLower = target.map(t => t.toLowerCase());
+            
+            const matches = guessLower.filter(g => targetLower.includes(g));
+            const allGuessMatch = guessLower.every(g => targetLower.includes(g));
+            const allTargetMatch = targetLower.every(t => guessLower.includes(t));
+            
+            if (allGuessMatch && allTargetMatch) return 'exact';
+            if (matches.length > 0) return 'partial';
+            return 'none';
+        }
+        
+        // Fallback for other types
+        return guess === target ? 'exact' : 'none';
+    }
+    
+    compareRank(guess, target) {
+        // Convert to numbers for comparison
+        const guessNum = parseInt(guess);
+        const targetNum = parseInt(target);
+        
+        if (isNaN(guessNum) || isNaN(targetNum)) {
+            // Fallback to string comparison if not numbers
+            return guess === target ? 'exact' : 'none';
+        }
+        
+        if (guessNum === targetNum) return 'exact';
+        if (guessNum > targetNum) return 'high';
+        return 'low';
     }
     
     formatArray(arr) {

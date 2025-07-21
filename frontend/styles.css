@@ -83,10 +83,11 @@ header p {
 
 .result-headers {
     display: grid;
-    grid-template-columns: 2fr 1fr 1fr 1.5fr 1fr 2fr 1fr 1.5fr 1.5fr 1.5fr;
+    grid-template-columns: repeat(11, 100px);
     gap: 2px;
     margin-bottom: 10px;
     padding: 0 2px;
+    justify-content: center;
 }
 
 .header-cell {
@@ -97,14 +98,20 @@ header p {
     font-weight: bold;
     font-size: 0.9rem;
     border-radius: 2px;
+    width: 100px;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .result-row {
     display: grid;
-    grid-template-columns: 2fr 1fr 1fr 1.5fr 1fr 2fr 1fr 1.5fr 1.5fr 1.5fr;
+    grid-template-columns: repeat(11, 100px);
     gap: 2px;
     margin-bottom: 2px;
     padding: 0 2px;
+    justify-content: center;
 }
 
 .result-cell {
@@ -113,12 +120,14 @@ header p {
     font-size: 0.85rem;
     border-radius: 2px;
     font-weight: 500;
-    min-height: 40px;
+    width: 100px;
+    height: 100px;
     display: flex;
     align-items: center;
     justify-content: center;
     word-wrap: break-word;
     hyphens: auto;
+    position: relative;
 }
 
 .result-cell.correct {
@@ -127,13 +136,45 @@ header p {
 }
 
 .result-cell.wrong {
-    background-color: #3a3a3c;
+    background-color: #b91c1c;
     color: #ffffff;
+}
+
+.result-cell.partial {
+    background-color: #b59f3b;
+    color: #ffffff;
+}
+
+.result-cell.high {
+    background-image: url('data/images/arrow.png');
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+    color: #ffffff;
+}
+
+.result-cell.low {
+    background: none;
+    color: #ffffff;
+}
+
+.result-cell.low::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url('data/images/arrow.png');
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+    transform: rotate(180deg);
+    z-index: -1;
 }
 
 .result-cell.name {
     font-weight: bold;
-    text-align: left;
     padding-left: 8px;
 }
 
@@ -142,7 +183,11 @@ header p {
 }
 
 .result-cell.name.wrong {
-    background-color: #3a3a3c;
+    background-color: #b91c1c;
+}
+
+.result-cell.name.partial {
+    background-color: #b59f3b;
 }
 
 .game-info {
@@ -239,7 +284,7 @@ header p {
     
     .result-headers,
     .result-row {
-        grid-template-columns: 1.5fr 0.8fr 0.8fr 1fr 0.8fr 1.5fr 0.8fr 1fr 1fr 1fr;
+        grid-template-columns: repeat(11, 80px);
         gap: 1px;
     }
     
@@ -247,6 +292,8 @@ header p {
     .result-cell {
         font-size: 0.75rem;
         padding: 6px 2px;
+        width: 80px;
+        height: 80px;
     }
     
     #spell-input {
