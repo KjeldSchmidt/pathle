@@ -65,9 +65,21 @@ class PathleGame {
             return;
         }
         
-        const matches = this.spellNames.filter(name => 
-            name.toLowerCase().includes(query)
-        ).slice(0, 10);
+        // Separate matches into starts-with and contains
+        const startsWithMatches = [];
+        const containsMatches = [];
+        
+        this.spellNames.forEach(name => {
+            const lowerName = name.toLowerCase();
+            if (lowerName.startsWith(query)) {
+                startsWithMatches.push(name);
+            } else if (lowerName.includes(query)) {
+                containsMatches.push(name);
+            }
+        });
+        
+        // Combine with starts-with first, then contains, limit to 15 total
+        const matches = [...startsWithMatches, ...containsMatches].slice(0, 15);
         
         this.showSuggestions(matches);
     }
