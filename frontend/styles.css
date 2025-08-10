@@ -135,63 +135,48 @@ header p {
 }
 
 .result-cell.correct {
-    background-color: #538d4e;
+    background-image: url('data/images/green-tile.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
     color: #ffffff;
 }
 
 .result-cell.wrong {
-    background-color: #b91c1c;
+    background-image: url('data/images/red-tile.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
     color: #ffffff;
 }
 
 .result-cell.partial {
-    background-color: #b59f3b;
+    background-image: url('data/images/yellow-tile.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
     color: #ffffff;
 }
 
 .result-cell.high {
-    background-image: url('data/images/arrow.png');
-    background-size: 100% 100%;
+    background-image: url('data/images/arrow-down.png');
+    background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
-    color: #ffffff;
+    color: #000000;
 }
 
 .result-cell.low {
-    background: none;
-    color: #ffffff;
-}
-
-.result-cell.low::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-image: url('data/images/arrow.png');
-    background-size: 100% 100%;
+    background-image: url('data/images/arrow-up.png');
+    background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
-    transform: rotate(180deg);
-    z-index: -1;
+    color: #000000;
 }
 
 .result-cell.name {
     font-weight: bold;
     padding-left: 8px;
-}
-
-.result-cell.name.correct {
-    background-color: #538d4e;
-}
-
-.result-cell.name.wrong {
-    background-color: #b91c1c;
-}
-
-.result-cell.name.partial {
-    background-color: #b59f3b;
 }
 
 .game-info {
