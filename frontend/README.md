@@ -51,9 +51,6 @@ To run the game locally:
    # Using Python's built-in server
    cd frontend
    python -m http.server 8000
-   
-   # Or using Node.js
-   npx serve .
    ```
 
 3. Open your browser to `http://localhost:8000`

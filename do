@@ -1,5 +1,11 @@
 #!/usr/bin/env bash
 
+## serve: Serve the frontend files locally
+function task_serve {
+  cd frontend
+  uv run python -m http.server 8746
+}
+
 ## tranform-spells: Transforms the foundry spell pack into a pathle-friendly format
 function task_transform_spells {
   uv run python scripts/transform_spells.py

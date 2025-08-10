@@ -39,7 +39,11 @@ header p {
     justify-content: center;
     gap: 10px;
     margin-bottom: 30px;
+}
+
+.input-container {
     position: relative;
+    width: 300px;
 }
 
 #spell-input {
@@ -49,7 +53,7 @@ header p {
     border-radius: 4px;
     background-color: #121213;
     color: #ffffff;
-    width: 300px;
+    width: 100%;
     outline: none;
 }
 
@@ -296,7 +300,7 @@ header p {
         height: 80px;
     }
     
-    #spell-input {
+    .input-container {
         width: 250px;
     }
 } 
