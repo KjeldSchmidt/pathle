@@ -249,7 +249,8 @@ header p {
     border-bottom: 1px solid #3a3a3c;
 }
 
-.suggestion-item:hover {
+.suggestion-item:hover,
+.suggestion-item.highlighted {
     background-color: #3a3a3c;
 }
 

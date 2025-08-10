@@ -6,6 +6,7 @@ class PathleGame {
         this.attempts = 0;
         this.gameOver = false;
         this.guessedSpells = [];
+        this.selectedSuggestionIndex = -1;
         
         this.elements = {
             input: document.getElementById('spell-input'),
@@ -72,10 +73,32 @@ class PathleGame {
     }
     
     handleKeyDown(e) {
+        const suggestions = this.elements.suggestions.querySelectorAll('.suggestion-item');
+        
         if (e.key === 'Enter') {
-            this.submitGuess();
+            e.preventDefault();
+            if (this.selectedSuggestionIndex >= 0 && suggestions[this.selectedSuggestionIndex]) {
+                // Select the highlighted suggestion
+                this.elements.input.value = suggestions[this.selectedSuggestionIndex].dataset.name;
+                this.hideSuggestions();
+                this.elements.input.focus();
+            } else {
+                this.submitGuess();
+            }
         } else if (e.key === 'Escape') {
             this.hideSuggestions();
+        } else if (e.key === 'ArrowDown') {
+            e.preventDefault();
+            if (suggestions.length > 0) {
+                this.selectedSuggestionIndex = Math.min(this.selectedSuggestionIndex + 1, suggestions.length - 1);
+                this.updateSuggestionHighlight();
+            }
+        } else if (e.key === 'ArrowUp') {
+            e.preventDefault();
+            if (suggestions.length > 0) {
+                this.selectedSuggestionIndex = Math.max(this.selectedSuggestionIndex - 1, -1);
+                this.updateSuggestionHighlight();
+            }
         }
     }
     
@@ -84,6 +107,9 @@ class PathleGame {
             this.hideSuggestions();
             return;
         }
+        
+        // Reset selection when suggestions change
+        this.selectedSuggestionIndex = -1;
         
         this.elements.suggestions.innerHTML = matches.map(name => 
             `<div class="suggestion-item" data-name="${name}">${name}</div>`
@@ -101,8 +127,25 @@ class PathleGame {
         });
     }
     
+    updateSuggestionHighlight() {
+        const suggestions = this.elements.suggestions.querySelectorAll('.suggestion-item');
+        suggestions.forEach((item, index) => {
+            if (index === this.selectedSuggestionIndex) {
+                item.classList.add('highlighted');
+                // Scroll the highlighted item into view
+                item.scrollIntoView({
+                    block: 'nearest',
+                    behavior: 'smooth'
+                });
+            } else {
+                item.classList.remove('highlighted');
+            }
+        });
+    }
+    
     hideSuggestions() {
         this.elements.suggestions.classList.remove('show');
+        this.selectedSuggestionIndex = -1;
     }
     
     submitGuess() {
