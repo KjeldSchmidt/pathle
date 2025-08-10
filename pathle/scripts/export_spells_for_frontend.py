@@ -3,7 +3,7 @@ import os
 from pathlib import Path
 
 from pathle.models.Pathle import PathleSpell
-from scripts.transform_spells import transform, IGNORED_FILES
+from pathle.scripts.transform_spells import transform, IGNORED_FILES
 
 
 def export_spells_for_frontend():

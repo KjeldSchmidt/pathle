@@ -6,7 +6,7 @@ from pydantic import ValidationError
 
 from pathle.models.foundry import FoundrySpell
 from pathle.models.Pathle import PathleSpell, PathleSpellType, PathleSpellTarget
-from pathle.models.Pathfinder2e import Pf2eTraits, Pf2eDamageType, Pf2eSpellRange
+from pathle.models.Pathfinder2e import Pf2eTraits, Pf2eDamageType
 
 # Files to ignore during processing
 IGNORED_FILES = [
@@ -24,9 +24,9 @@ def determine_spell_type(foundry_spell: FoundrySpell) -> PathleSpellType:
     """Determine PathleSpellType from FoundrySpell"""
     traits = foundry_spell.system.traits.value
     
-    if Pf2eTraits.cantrip.value in traits:
+    if Pf2eTraits.cantrip in traits:
         return PathleSpellType.cantrip
-    elif Pf2eTraits.focus.value in traits:
+    elif Pf2eTraits.focus in traits:
         return PathleSpellType.focus
     elif foundry_spell.system.ritual is not None:
         return PathleSpellType.ritual
@@ -139,5 +139,5 @@ def main():
         f"Processed {processed} files, {successes} succeeded, {successes / processed:.2%} success rate"
     )
 
-
-main()
+if __name__ == "__main__":
+    main()

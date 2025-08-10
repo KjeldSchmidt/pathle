@@ -3,12 +3,17 @@
 ## serve: Serve the frontend files locally
 function task_serve {
   cd frontend
-  uv run python -m http.server 8746
+  uv run -m http.server 8746
 }
 
-## tranform-spells: Transforms the foundry spell pack into a pathle-friendly format
+## validate-transform: Parses the foundry spell pack to verify that export to pathle will work
+function task_validate_transform {
+  uv run -m pathle.scripts.transform_spells
+}
+
+## transform-spells: Transforms the foundry spell pack into a pathle-friendly format
 function task_transform_spells {
-  uv run python scripts/transform_spells.py
+  uv run -m pathle.scripts.export_spells_for_frontend
 }
 
 ## fmt: applies formatting to the project
